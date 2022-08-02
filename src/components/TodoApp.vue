@@ -62,21 +62,30 @@
                   :id="'task_' + index"
                   :defaultState="task.status"
                   v-on:change="updateStatus(task)"
+                  :disabled="task.completed"
                 />
               </div>
               <p class="card-text fw-light fs-6">{{ task.detail }}</p>
             </div>
             <div class="card-footer">
               <div class="row">
+                
                 <div
+                  v-if="!task.completed"
                   class="col-md-6 text-center"
                   v-b-modal="'edit-modal'"
                   @click="editTask(index)"
                 >
-                  <span class="fa fa-pen"></span>
+                  <i class="fa fa-pen" title="Edit task"></i>
+                </div>
+                <div
+                  v-else
+                  class="col-md-6 text-center"                  
+                >
+                  <i class="fa fa-pen" title="Task completed! Unable to edit"></i>
                 </div>
                 <div class="col-md-6 text-center" @click="deleteTask(index)">
-                  <span class="fa fa-trash"></span>
+                  <i class="fa fa-trash" title="Delete task"></i>
                 </div>
               </div>
             </div>
@@ -163,6 +172,7 @@ export default {
           title: this.task.title,
           detail: this.task.detail,
           status: false,
+          completed: false,
         });
       } else {
         this.tasks[this.editedTask].title = this.task.title;
@@ -187,7 +197,10 @@ export default {
 
     updateStatus(task) {
       task.status ? (task.status = false) : (task.status = true);
-      console.log(task);
+      if (task.status) {
+        task.completed = true
+      }
+
     },
 
     counterTask() {
