@@ -105,6 +105,9 @@
         ></textarea>
         <label for="floatingDetail">Detail</label>
       </div>
+      <div v-if="error.status" class="alert text-center" role="alert">
+        {{ error.message }}
+      </div>
       <div class="d-grid mt-4">
         <button
           class="btn text-uppercase fw-bold custom-btn"
