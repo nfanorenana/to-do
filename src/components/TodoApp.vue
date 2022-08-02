@@ -91,19 +91,19 @@
           v-model="task.title"
           class="form-control"
           placeholder="Title"
-          id="floatingTitle"
+          id="floatingTitleEdit"
         />
-        <label for="floatingTitle">Title</label>
+        <label for="floatingTitleEdit">Title</label>
       </div>
       <div class="form-floating mb-3">
         <textarea
           class="form-control"
           v-model="task.detail"
-          id="floatingDetail"
+          id="floatingDetailEdit"
           placeholder="Detail"
           rows="3"
         ></textarea>
-        <label for="floatingDetail">Detail</label>
+        <label for="floatingDetailEdit">Detail</label>
       </div>
       <div v-if="error.status" class="alert text-center" role="alert">
         {{ error.message }}
