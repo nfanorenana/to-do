@@ -90,8 +90,8 @@ export default {
   height: 25px;
   border-radius: 12px;
   width: 45px;
-  background: #d1d5db;
-  box-shadow: inset 0 0 1px #e5e7eb;
+  background: #f0ece3;
+  box-shadow: inset 0 0 1px #f0ece3;
   position: relative;
   transition: all 0.25s;
 }
@@ -121,7 +121,7 @@ export default {
 }
 
 .active .toggle__switch {
-  background: #10b981;
+  background: #d5bdaf;
   box-shadow: inset 0 0 1px #fff;
 }
 

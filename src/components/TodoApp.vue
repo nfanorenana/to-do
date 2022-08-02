@@ -25,9 +25,12 @@
               ></textarea>
               <label for="floatingDetail">Detail</label>
             </div>
+            <div v-if="error.status" class="alert text-center" role="alert">
+              {{ error.message }}
+            </div>
             <div class="d-grid mt-4">
               <button
-                class="btn btn-primary btn-login text-uppercase fw-bold"
+                class="btn text-uppercase fw-bold custom-btn"
                 @click="submitTask"
               >
                 Add task
@@ -51,7 +54,7 @@
 
       <div class="row" v-for="(task, index) in tasks" :key="index">
         <div class="col-sm-9 col-md-10 col-lg-5 mx-auto">
-          <div class="card border-0 shadow rounded-3 my-2">
+          <div class="card border-0 shadow rounded-5 my-2">
             <div class="card-body p-2 p-sm-4">
               <div class="d-flex justify-content-between align-items-center">
                 <h3 class="card-title mb-3">{{ task.title }}</h3>
@@ -81,7 +84,6 @@
         </div>
       </div>
     </div>
-
     <b-modal id="edit-modal" title="Update Task" hide-footer>
       <div class="form-floating mb-3">
         <input
@@ -105,7 +107,7 @@
       </div>
       <div class="d-grid mt-4">
         <button
-          class="btn btn-primary btn-login text-uppercase fw-bold"
+          class="btn text-uppercase fw-bold custom-btn"
           @click="
             submitTask();
             $bvModal.hide('edit-modal');
@@ -130,19 +132,27 @@ export default {
 
   data() {
     return {
+      isEditTask: false,
+      editedTask: null,
+      error: {
+        status: false,
+        message: "Title field is required!!",
+      },
       task: {
         title: "",
         detail: "",
       },
-      editedTask: null,
-      toggleValue: false,
       tasks: [],
-      isEditTask: false,
+      toggleValue: false,
     };
   },
 
   methods: {
     submitTask() {
+      if (!this.task.title) {
+        this.error.status = true;
+      }
+
       if (this.task.title.length === 0) return;
 
       if (this.editedTask === null) {
@@ -196,5 +206,23 @@ export default {
 <style scoped>
 .pointer {
   cursor: pointer;
+}
+.custom-btn {
+  background-color: #d5bdaf;
+  color: #fff;
+}
+
+.custom-btn:hover {
+  background-color: #e3d5ca;
+  color: #fff;
+}
+
+.alert {
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px;
+  position: relative;
+  border-radius: 5px;
+  color: #f7a7a3;
 }
 </style>
